@@ -1,0 +1,47 @@
+:root {
+  --white: #fff;
+  --black: #000;
+
+  --gray-100: #e1e1e6;
+  --gray-300: #c4c4cc;
+  --gray-400: #8d8d99;
+  --gray-600: #323238;
+  --gray-700: #29292e;
+  --gray-800: #202024;
+  --gray-900: #121214;
+
+  --green-300: #00B37E;
+  --green-500: #00875f;
+
+  --red-500: #F75A68;
+
+  /* source: https://hookagency.com/blog/website-color-schemes-2020/ */
+  --ice-cold: #a0d2eb;
+  --freeze-purple: #e5eaf5;
+  --medium-purple: #d0bdf4;
+  --purple-pain: #8458B3;
+  --heavy-purple: #494d5f;
+}
+
+:focus {
+  outline: transparent;
+  /* box-shadow: 0 0 0 2px var(--green-500); */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--heavy-purple);
+  color: var(--gray-300);
+  -webkit-font-smoothing: aliased;
+}
+
+body, input, textarea, button {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}

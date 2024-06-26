@@ -1,0 +1,20 @@
+.button {
+  border-radius: 8px;
+  padding: 0.5rem;
+  border: none;
+  background-color: var(--gray-600);
+  color: var(--ice-cold);
+
+  transition: background-color 0.1s;
+}
+
+.button:hover {
+  background: var(--green-300);
+  color: var(--white);
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+button + button {
+  margin-left: 1rem;
+}
