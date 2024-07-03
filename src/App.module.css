@@ -113,6 +113,37 @@
   font-size: 2rem;
 }
 
-.result .wordCount {
+.result .highlight {
+  color: var(--green-300);
+  text-decoration: underline;
+  font-weight: bold;
+}
 
+.foundWordsList {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* text-align: center; */
+}
+
+.foundWordsList h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 24vw;
+  border: solid 1px;
+  padding: 0.5rem;
+}
+
+.row span {
+  font-size: 1.25rem;
+}
+
+.row span + span {
+  /* margin-top: 0.5rem; */
 }

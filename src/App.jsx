@@ -13,9 +13,11 @@ import './global.css'
 export function App() {
   const [selectedOption, setSelectedOption] = useState(GREP_A_WORD);
   const [inputValue, setInputValue] = useState('');
-  const [wordCount, setWordCount] = useState('');
+  const [wordCount, setWordCount] = useState(-1);
   const [isCleanFormButtonDisabled, setIsCleanFormButtonDisabled] = useState(true);
   const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
+  const [foundWord, setFoundWord] = useState('');
+  const [foundWords, setFoundWords] = useState([]);
 
   const inputRef = useRef(null);
 
@@ -41,23 +43,41 @@ export function App() {
     const inputValueStr = inputValue.toLowerCase();
 
     if (!wordCountObject.hasOwnProperty(inputValueStr)) {
-      setWordCount('no');
+      setWordCount(0);
       return;
     }
 
-    setWordCount(wordCountObject[inputValueStr]);
+    setFoundWord(inputValueStr);
+
+    const wordCount = wordCountObject[inputValueStr]
+
+    setWordCount(wordCount);
+
+    const foundWordObj = {
+      "word": inputValueStr,
+      "count": wordCount
+    }
+
+    let index = foundWords.findIndex(word => wordCount > word.count);
+    if (index === -1) {
+      index = foundWords.length;
+    }
+
+    const newArray = [...foundWords.slice(0, index), foundWordObj, ...foundWords.slice(index)];
+    setFoundWords(newArray);
   }
   
   function handleCleanForm() {
     event.preventDefault();
 
     setInputValue('');
-    setWordCount('');
+    setWordCount(-1);
     inputRef.current.focus();
   }
 
   function onKeyUpInput() {
     const enterKeyCharCode = 13;
+
     if (event.keyCode !== enterKeyCharCode) {
       return;
     }
@@ -126,15 +146,33 @@ export function App() {
           </>
         }
 
-        { wordCount &&
+        { foundWord &&
           <>
             <div className={styles.result}>
-              <p>There are</p>
-              <p className={styles.wordCount}> {wordCount} </p>
-              <p>occurrences of this word in my diary!</p>
+              <p>There are{' '}</p>
+              <p className={styles.highlight}>{wordCount}</p>
+              <p>{' '}occurrences of the word{' "'}</p>
+              <p className={styles.highlight}>{foundWord}</p>
+              <p>{'" '}in my diary!</p>
             </div>
           </>
         }
+
+        <div className={styles.foundWordsList}>
+          { foundWords.length !== 0 &&
+            <h2>Found words</h2>
+          }
+          { foundWords.map(wordObj => {
+            return(
+              <>
+                <div key={wordObj.word} className={styles.row}>
+                  <span>{wordObj.word}</span>
+                  <span>{wordObj.count}</span>
+                </div>
+              </>
+            )
+          }) }
+        </div>
       </div>
     </div>
   )
